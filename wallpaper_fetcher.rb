@@ -6,11 +6,6 @@ class WallpaperFetcher
   include Celluloid
 
   def fetch(url, directory)
-    puts "\n*************************************************************************************************\n"
-    puts "Fetching wallpapers synchronously"
-    puts "URL: #{url}"
-    puts "*************************************************************************************************\n"
-
     doc = Nokogiri::HTML(open(url))
     downloader = ImageDownloader.new
 
@@ -22,12 +17,6 @@ class WallpaperFetcher
   end
 
   def fetch_async(url, directory, downloader_pool)
-    puts "\n*************************************************************************************************\n"
-    puts "Fetching wallpapers asynchronously"
-    puts "URL: #{url}"
-    puts "Pool size: #{downloader_pool.size}"
-    puts "*************************************************************************************************\n"
-
     doc = Nokogiri::HTML(open(url))
 
     future_images = doc.xpath('//img').collect do |img|

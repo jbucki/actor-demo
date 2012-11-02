@@ -16,8 +16,20 @@ Dir.mkdir(sync_directory) unless Dir.exists?(sync_directory)
 
 if pool_size > 0
   downloader_pool = ImageDownloader.pool(size: pool_size)
+
+  puts "\n*************************************************************************************************\n"
+  puts "Fetching wallpapers asynchronously"
+  puts "URL: #{url}"
+  puts "Pool size: #{downloader_pool.size}"
+  puts "*************************************************************************************************\n"
+
   total_saved = fetcher.fetch_async(url, sync_directory, downloader_pool)
 else
+  puts "\n*************************************************************************************************\n"
+  puts "Fetching wallpapers synchronously"
+  puts "URL: #{url}"
+  puts "*************************************************************************************************\n"
+
   total_saved = fetcher.fetch(url, sync_directory)
 end
 
